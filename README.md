@@ -111,53 +111,95 @@ Full results: [`outputs/real_validation.json`](outputs/real_validation.json)
 
 ## Getting started
 
-<details>
-<summary><strong>Run the website</strong></summary>
+### 1. Install `make` (if not already installed)
+
+`make` allows you to run pipelines, servers, and tests using simple, memorable commands.
+
+- **Windows:**
+  - Using **winget** (built-in on Windows 10/11):
+    ```powershell
+    winget install GnuWin32.Make
+    ```
+  - Using **Chocolatey**:
+    ```powershell
+    choco install make
+    ```
+  - Using **Scoop**:
+    ```powershell
+    scoop install make
+    ```
+  *(After installing, restart your terminal to reload `PATH`)*
+  > **Tip:** If you prefer running without `make`, you can invoke `python scripts/run_demo.py` directly for the exact same single-terminal experience!
+
+- **macOS:**
+  ```bash
+  xcode-select --install
+  # or via Homebrew:
+  brew install make
+  ```
+
+- **Linux (Ubuntu / Debian):**
+  ```bash
+  sudo apt update && sudo apt install make
+  # or full build essentials:
+  sudo apt install build-essential
+  ```
+
+---
+
+### 2. Setup environment & dependencies
 
 ```bash
-pnpm install
-pnpm dev        # http://localhost:3000 — reads public/data/*.json
-```
+# Clone the repository
+git clone https://github.com/akshhkaushik/vayu-aqi-hcho.git
+cd VayuDrishti
 
-This project uses **pnpm** exclusively — not npm.
-</details>
-
-<details>
-<summary><strong>Run the research pipeline</strong></summary>
-
-```bash
-# Setup virtual environment & dependencies
+# Create and activate Python virtual environment
 python -m venv .venv
 source .venv/bin/activate       # On Linux/macOS
-# or: .venv\Scripts\activate    # On Windows PowerShell / Git Bash
+# or: .venv\Scripts\activate    # On Windows PowerShell
 
-pip install -e .
-pip install -r requirements.txt
-
-# Try it immediately — synthetic India data, no credentials needed
-make demo                 # -> outputs/: AQI maps, HCHO hotspots, figures, demo_summary.md
-make demo-fast            # quick smoke version; also emits zones, anomalies, and metadata
-
-# For real data
-make check-ingest         # readiness check: packages, GEE/CDS/FIRMS creds, config
-earthengine authenticate  # one-time GEE auth
-
-OPENAQ_API_KEY=... make real   # real CPCB/OpenAQ-validated AQI + dual CV
-make fetch-web                 # real TROPOMI/MODIS/ERA5 layers -> public/data/*.json
+# Install Python package in editable mode + pnpm frontend packages
+make setup
 ```
+
+---
+
+### 3. Run the demo (`make demo`)
+
+Run the complete demo experience in a **single terminal** without opening separate windows for frontend, dashboard, or pipeline:
+
+```bash
+make demo
+```
+
+**What this does automatically in one command:**
+1. **Checks demo data**: Ensures required analysis and grid layers (`public/data/*.json`) exist. If missing, it automatically runs the synthetic simulation pipeline and exports web artifacts.
+2. **Launches both servers concurrently**:
+   - 🌐 **Interactive Web Map (Next.js 16 + deck.gl + MapLibre):** [http://localhost:3000](http://localhost:3000)
+   - 📊 **Research Explorer Dashboard (Streamlit):** [http://localhost:8501](http://localhost:8501)
+3. **Unified logs**: Streams both server outputs with distinct colored labels (`[web]` and `[dashboard]`).
+4. **Single-terminal exit**: Pressing <kbd>Ctrl</kbd>+<kbd>C</kbd> cleanly and safely terminates all child servers with no orphaned background processes.
+
+---
+
+### Available `make` targets
 
 | Target | Command | Purpose |
 |---|---|---|
-| `make demo` | `python pipelines/run_demo.py` | Full synthetic end-to-end simulation, no credentials required |
-| `make demo-fast` | `python pipelines/run_demo.py --fast` | Quick smoke run; generates comparative layers & JSON exports |
+| `make demo` | `python scripts/run_demo.py` | **Recommended:** All-in-one demo (web map + dashboard in one terminal) |
+| `make demo-web` | `python scripts/run_demo.py --no-dashboard` | Launch only the Next.js scrollytelling web map (`http://localhost:3000`) |
+| `make demo-dashboard` | `python scripts/run_demo.py --no-web` | Launch only the Streamlit research dashboard (`http://localhost:8501`) |
+| `make demo-all` | `python scripts/run_demo.py --pipeline` | Re-run full synthetic pipeline, export layers, then launch both demo servers |
+| `make demo-pipeline` | `python pipelines/run_demo.py` + `export_web.py` | Run full synthetic simulation and export layers (no servers) |
+| `make demo-fast` | `python pipelines/run_demo.py --fast` + `export_web.py` | Quick smoke run of synthetic pipeline & export layers (no servers) |
 | `make real` | `python pipelines/run_real.py` | Real OpenAQ/CPCB-validated AQI + dual CV |
-| `make fetch-web` | `python pipelines/fetch_real_web.py` | Real satellite observation layers → web |
+| `make fetch-web` | `python pipelines/fetch_real_web.py` | Pull real satellite observation layers (TROPOMI/MODIS/ERA5) into web data |
 | `make check-ingest` | `python pipelines/check_ingest.py` | Pre-flight readiness check for APIs and credentials |
-| `make dashboard` | `streamlit run dashboard/app.py` | Streamlit interactive research dashboard |
-| `make test` / `make lint` | `pytest -q` / `ruff check` | Deterministic AQI, PHV, Gi*, K-Means, and Isolation Forest test suite |
+| `make test` / `make lint` | `pytest -q` / `ruff check` | Run unit tests (AQI engine, PHV, Gi*, K-Means) and linter |
+| `make clean` | cross-platform script | Remove `__pycache__`, pytest, and ruff cache directories |
 
-*Note on cross-platform execution:* The `Makefile` automatically invokes `python` (overridable with `make demo PY=python3`), functioning cleanly across Windows (Git Bash/PowerShell), macOS, and Linux.
-</details>
+*Note on cross-platform execution:* The `Makefile` automatically invokes `python` (overridable with `make demo PY=python3`), functioning cleanly across Windows (PowerShell/CMD/Git Bash), macOS, and Linux.
 
 ---
 
