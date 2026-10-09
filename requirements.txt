@@ -19,7 +19,7 @@ h3>=4.5.0                 # hex grid indexing (optional aggregation)
 regionmask>=0.13.0
 
 # Earth Engine (server-side data access)
-earthengine-api>=1.7.46
+earthengine-api>=1.7.47
 geemap>=0.37.2
 eemont>=2025.7.1             # convenience for S5P/ERA5 collection handling
 
@@ -31,8 +31,8 @@ beautifulsoup4>=4.15.0    # CPCB / MOSDAC scraping helpers
 # Machine learning
 scikit-learn>=1.7.2
 xgboost>=3.2.0
-torch>=2.14.0              # CNN / LSTM / CNN-LSTM
-torchvision>=0.29.0
+torch>=2.14.1              # CNN / LSTM / CNN-LSTM
+torchvision>=0.29.1
 
 # Spatial statistics (HCHO hotspots)
 esda>=2.7.0               # Getis-Ord Gi* (PySAL)
@@ -51,7 +51,7 @@ seaborn>=0.13.2
 plotly>=7.1.0
 
 # Dashboard
-streamlit>=1.64.0
+streamlit>=1.65.0
 folium>=0.20.0
 streamlit-folium>=0.26.2
 
@@ -64,4 +64,4 @@ typer>=0.27.2              # CLI for pipeline scripts
 
 # Dev / test
 pytest>=9.1.1
-ruff>=0.16.9
+ruff>=0.16.10
