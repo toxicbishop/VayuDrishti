@@ -64,4 +64,4 @@ typer>=0.27.3              # CLI for pipeline scripts
 
 # Dev / test
 pytest>=9.1.1
-ruff>=0.17.0
+ruff>=0.17.1
