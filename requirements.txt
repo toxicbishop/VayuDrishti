@@ -32,7 +32,7 @@ beautifulsoup4>=4.15.0    # CPCB / MOSDAC scraping helpers
 scikit-learn>=1.7.2
 xgboost>=3.2.0
 torch>=2.14.1              # CNN / LSTM / CNN-LSTM
-torchvision>=0.29.1
+torchvision>=0.29.2
 
 # Spatial statistics (HCHO hotspots)
 esda>=2.7.0               # Getis-Ord Gi* (PySAL)
@@ -57,11 +57,11 @@ streamlit-folium>=0.26.2
 
 # Config / utilities / quality
 pyyaml>=6.0.3
-pydantic>=2.14.1
+pydantic>=2.14.2
 tqdm>=4.70.1
 loguru>=0.7.3
 typer>=0.27.3              # CLI for pipeline scripts
 
 # Dev / test
-pytest>=9.1.1
-ruff>=0.17.1
+pytest>=9.2.0
+ruff>=0.17.3
