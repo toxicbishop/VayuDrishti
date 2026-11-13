@@ -57,11 +57,11 @@ streamlit-folium>=0.26.2
 
 # Config / utilities / quality
 pyyaml>=6.0.3
-pydantic>=2.14.2
+pydantic>=2.14.3
 tqdm>=4.70.1
 loguru>=0.7.3
-typer>=0.27.3              # CLI for pipeline scripts
+typer>=0.29.0              # CLI for pipeline scripts
 
 # Dev / test
 pytest>=9.2.0
-ruff>=0.17.3
+ruff>=0.17.4
