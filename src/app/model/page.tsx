@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import { Section } from "@/components/Section";
 import { Model, Results, Insights } from "@/components/sections";
 import { ChapterPager } from "@/components/ChapterNav";
+import { createPageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createPageMetadata({
+  path: "/model",
+  title: "05 · Model & Accuracy — Random Forest Validation | VayuDrishti",
+  description:
+    "Random and spatial cross-validation benchmarks against 161 real CPCB stations for PM2.5, PM10, NO2, O3, SO2, and CO.",
+});
 
 const ACCURACY: [string, string, string][] = [
   ["PM2.5 · PM10", "R² 0.53 · 0.58", "random CV · RMSE 60 / 92 µg/m³"],

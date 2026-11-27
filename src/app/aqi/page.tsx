@@ -1,22 +1,14 @@
-"use client";
-import { AQIIndia } from "@/components/sections";
-import { ChapterPager } from "@/components/ChapterNav";
-import { LocationExplorer, useCellSelect } from "@/components/LocationExplorer";
-import { CellSelectContext } from "@/lib/CellSelectContext";
+import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
+import { AqiClient } from "./AqiClient";
+
+export const metadata: Metadata = createPageMetadata({
+  path: "/aqi",
+  title: "03 · Daily Surface AQI Map across India | VayuDrishti",
+  description:
+    "Explore satellite-derived daily surface AQI estimates and CPCB-validated RAPI risk across India.",
+});
 
 export default function AqiPage() {
-  const { cell, onCellSelect, onCellClose } = useCellSelect();
-  return (
-    <CellSelectContext.Provider value={onCellSelect}>
-      <main className="relative">
-        <div className="fixed inset-y-0 right-0 z-50 pointer-events-none">
-          <div className="pointer-events-auto h-full">
-            <LocationExplorer cell={cell ? { ...cell, dataStatus: "synthetic_demo" } : null} onClose={onCellClose} />
-          </div>
-        </div>
-        <AQIIndia />
-        <ChapterPager current="/aqi" />
-      </main>
-    </CellSelectContext.Provider>
-  );
+  return <AqiClient />;
 }

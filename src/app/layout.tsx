@@ -5,12 +5,9 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { ChapterNav } from "@/components/ChapterNav";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Footer } from "@/components/sections";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "VayuDrishti — India's Air, Observed",
-  description:
-    "Development of Surface AQI & Identification of HCHO Hotspots over India using Satellite Data. A scientific documentary on India's air quality through satellites, atmospheric science, and deep learning.",
-};
+export const metadata: Metadata = createPageMetadata();
 
 export default function RootLayout({
   children,

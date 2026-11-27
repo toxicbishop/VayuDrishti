@@ -1,8 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Preloader } from "@/components/Preloader";
 import { Hero } from "@/components/Hero";
 import { MissionSnapshot } from "@/components/sections";
 import { CHAPTERS } from "@/lib/chapters";
+import { createPageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createPageMetadata();
 
 export default function Home() {
   return (
