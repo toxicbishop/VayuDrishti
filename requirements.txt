@@ -6,7 +6,7 @@ xarray>=2025.6.1
 netCDF4>=1.7.4
 h5py>=3.16.0
 zarr>=2.18.3
-dask[complete]>=2026.8.0
+dask[complete]>=2026.11.0
 pyarrow>=25.0.1           # parquet I/O for the unified database
 
 # Geospatial
@@ -15,7 +15,7 @@ rioxarray>=0.19.0
 geopandas>=1.1.4
 shapely>=2.1.2
 pyproj>=3.7.1
-h3>=4.5.0                 # hex grid indexing (optional aggregation)
+h3>=4.5.1                 # hex grid indexing (optional aggregation)
 regionmask>=0.13.0
 
 # Earth Engine (server-side data access)
@@ -56,12 +56,12 @@ folium>=0.20.0
 streamlit-folium>=0.26.2
 
 # Config / utilities / quality
-pyyaml>=6.0.3
-pydantic>=2.14.3
+pyyaml>=6.0.4
+pydantic>=2.14.4
 tqdm>=4.70.1
 loguru>=0.8.0
 typer>=0.29.1              # CLI for pipeline scripts
 
 # Dev / test
 pytest>=9.2.0
-ruff>=0.17.5
+ruff>=0.17.6
